@@ -2,15 +2,14 @@ export class Produto {
 
     nome: string;
     precoCentavos: number;
-    unidades: string;
+    unidade: "kg" | "un";
     categoria: string;
-    // id: number;
 
-    constructor(nome: string, precoCentavos: number, unidades: string, categoria: string) {
+    constructor(nome: string, precoCentavos: number, unidade: "kg" | "un", categoria: string) {
 
         this.nome = nome;
         this.precoCentavos = precoCentavos;
-        this.unidades = unidades;
+        this.unidade = unidade;
         this.categoria = categoria;
 
     }
@@ -24,8 +23,6 @@ export class Produto {
     precoPorQuantidade(produto: string, quantidade: number): number {
 
         return this.precoCentavos * quantidade;
-
-        //console.log(this.nome + " X " + quantidade + " = R$ " + (this.precoCentavos*quantidade));
 
     }
 
