@@ -7,21 +7,35 @@ export interface ItemCesta {
 
 export class Orcamento {
 
-    itens: ItemCesta[] = [];
-    limiteCentavos: number;
+    private itens: ItemCesta[] = [];
+    private limiteCentavos: number;
 
     constructor(itens: ItemCesta[], limiteCentavos: number) {
 
+        if (limiteCentavos <= 0) {
+
+            throw new Error("O limite precisa ser maior que zero.");
+
+        }
+
         this.itens = itens;
         this.limiteCentavos = limiteCentavos;
-    
+
     }
 
-    colocar(preco_centavos: number, quantidade: number): void {
-        
-        let item: ItemCesta = {preco_centavos, quantidade};
+    colocar(preco_centavos: number, quantidade: number): boolean {
+
+        if (preco_centavos < 0 || quantidade <= 0) {
+
+            return false
+
+        }
+
+        let item: ItemCesta = { preco_centavos, quantidade };
 
         this.itens.push(item);
+
+        return true;
 
     }
 
@@ -51,9 +65,17 @@ export class Orcamento {
 
     }
 
-    mudarLimite(novoLimite: number): void {
+    mudarLimite(novoLimite: number): boolean {
+
+        if (novoLimite <= 0){
+
+            return false;
+
+        }
 
         this.limiteCentavos = novoLimite;
+
+        return true;
 
     }
 

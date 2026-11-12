@@ -12,6 +12,27 @@ import { Orcamento } from "../dominio/orcamento";
 
 // -----------------E23-----------------------
 
+// const orcamento = new Orcamento([], 6000);
+
+// orcamento.colocar(2490, 1);
+// orcamento.colocar(799, 2);
+// orcamento.colocar(749, 2);
+
+// console.log("");
+// console.log("Gasto: " + orcamento.gasto() + " Saldo: " + orcamento.saldo() + " Orcamento estourado: " + orcamento.estourou());
+
+// orcamento.mudarLimite(5000);
+// console.log("");
+// console.log("Orcamento alterado para: " + (orcamento.limiteCentavos));
+
+// console.log("");
+// console.log("Gasto: " + orcamento.gasto() + " Saldo: " + orcamento.saldo() + " Orcamento estourado: " + orcamento.estourou());
+// console.log("");
+
+// -------------------------------------------
+
+// -----------------E24-----------------------
+
 const orcamento = new Orcamento([], 6000);
 
 orcamento.colocar(2490, 1);
@@ -19,14 +40,7 @@ orcamento.colocar(799, 2);
 orcamento.colocar(749, 2);
 
 console.log("");
-console.log("Gasto: " + orcamento.gasto() + " Saldo: " + orcamento.saldo() + " Orcamento estourado: " + orcamento.estourou());
-
-orcamento.mudarLimite(5000);
-console.log("");
-console.log("Orcamento alterado para: " + (orcamento.limiteCentavos));
-
-console.log("");
-console.log("Gasto: " + orcamento.gasto() + " Saldo: " + orcamento.saldo() + " Orcamento estourado: " + orcamento.estourou());
+console.log(orcamento.mudarLimite(-50) + " | " + orcamento.saldo());
 console.log("");
 
 // -------------------------------------------
