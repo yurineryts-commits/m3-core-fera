@@ -2,36 +2,74 @@
 // const fs = require("fs");
 
 import * as fs from "fs";
+import { Produto } from "./produto";
 
-// interface ProdutoDaApi{
+interface ProdutoDaApi{
 
-//     id: number;
-//     nome: string;
-//     precos_centavos: number;
-//     unidade: "kg" | "un";
-//     categoria: string;
+    id: number;
+    nome: string;
+    preco_centavos: number;
+    unidade: "kg" | "un";
+    categoria: string;
 
 
-// }
-
+}
 
 export class Catalogo{
 
        
-        produtos: any[];
-
+        produtos: Produto[]=[];
+        recusados: string[]=[];
 
 
         constructor(caminho: string){
 
-         const texto = fs.readFileSync(caminho, "utf8"); 
+         // const texto = fs.readFileSync(caminho, "utf8"); 
+         const resposta= JSON.parse(fs.readFileSync(caminho, "utf8"));
+        
+         for(let i=0; i<resposta.dados.length; i++ ){
+       
+          const dado: ProdutoDaApi =resposta.dados[i];
 
-         this.produtos = JSON.parse(texto).dados;
+          if (typeof dado.preco_centavos!== "number"){
+
+           this.recusados.push(dado.nome + " preço não é número"); 
+         
+          }
+
+          else if ( dado.unidade!== "kg" &&  dado.unidade!== "un"){
+
+             this.recusados.push(dado.nome + " :unidade " + dado.unidade + " não é kg nem un")
+           
+
+          }
+
+          else{
+
+              const produto = new Produto (
+
+              // dado.id,
+              dado.nome,
+              dado.preco_centavos,
+              dado.unidade,
+              dado.categoria
+
+
+          );  
+
+
+             this.produtos.push(produto);
+
+          }
+
+         } 
+
+        
         }
         
-        buscar(nome: string){
+        buscar(nome: string): Produto | undefined {
 
-              for(let i =0; i< this.produtos.length; i++){
+           for(let i =0; i< this.produtos.length; i++){
 
                 if (this.produtos[i].nome===nome){
 
@@ -39,27 +77,32 @@ export class Catalogo{
 
                 }
 
-              }
+            }
+
+          return undefined;
 
         }
 
 
-        precoDe(nome: string): number{
+        precoDe(nome: string): number | undefined{
+        
 
-        return this.buscar(nome).preco_centavos;  
+        const produto = this.buscar(nome);
+
+        if (produto !== undefined){
+
+
+        return produto.preco_centavos;
+
+        }    
+
+         return undefined;
         }
 
 
 }
 
-const catalogo = new Catalogo("dados/produtos.json")
 
+// const catalogo = new Catalogo("dados/produtos.json")
 
-
-// console.log(produtos.length + " produtos carregados");
-// console.log(precoDe(produtos, "arroz 5 kg"));
-// console.log(precoDe(produtos, "feijao 1 kg"));
-
-
-// module.exports = { carregar, buscar, precoDe };
 
