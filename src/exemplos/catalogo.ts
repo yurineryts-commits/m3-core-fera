@@ -12,12 +12,21 @@ import { Catalogo } from "../dominio/catalogo";
 
 
 
+// const catalogo = new Catalogo("dados/produtos.json");
+// console.log(catalogo.produtos.length + " produtos válidos");
+// console.log("Recusados:", catalogo.recusados);
+// const feijao = catalogo.buscar("feijao 1 kg");
+// if (feijao === undefined) {
+//   console.log("feijao 1 kg não está no catálogo");
+// } else {
+//   console.log(feijao.precoEmReais());
+// }
+
+
 const catalogo = new Catalogo("dados/produtos.json");
-console.log(catalogo.produtos.length + " produtos válidos");
+console.log(catalogo.quantidade() + " produtos válidos");
 console.log("Recusados:", catalogo.recusados);
-const feijao = catalogo.buscar("feijao 1 kg");
-if (feijao === undefined) {
-  console.log("feijao 1 kg não está no catálogo");
-} else {
-  console.log(feijao.precoEmReais());
+const arroz = catalogo.buscar("arroz 5 kg");
+if (arroz !== undefined) {
+  console.log(arroz.precoEmReais());
 }
