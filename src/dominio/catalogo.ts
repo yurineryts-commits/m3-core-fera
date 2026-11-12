@@ -18,8 +18,8 @@ interface ProdutoDaApi{
 export class Catalogo{
 
        
-        produtos: Produto[]=[];
-        recusados: string[]=[];
+        private produtos: Produto[]=[];
+        readonly recusados: string[]=[];
 
 
         constructor(caminho: string){
@@ -46,19 +46,26 @@ export class Catalogo{
 
           else{
 
-              const produto = new Produto (
+              // const produto = new Produto (
 
-              // dado.id,
-              dado.nome,
-              dado.preco_centavos,
-              dado.unidade,
-              dado.categoria
+              // // dado.id,
+              // dado.nome,
+              // dado.preco_centavos,
+              // dado.unidade,
+              // dado.categoria
+
+              // );  
 
 
-          );  
+               try {
+               this.produtos.push(new Produto(dado.nome, dado.preco_centavos, dado.unidade, dado.categoria));
+               } catch (erro) {
+               this.recusados.push(dado.nome + ": " + erro);
+               }
 
+               
 
-             this.produtos.push(produto);
+             // this.produtos.push(produto);
 
           }
 
@@ -83,7 +90,6 @@ export class Catalogo{
 
         }
 
-
         precoDe(nome: string): number | undefined{
         
 
@@ -100,9 +106,23 @@ export class Catalogo{
         }
 
 
+        quantidade(): number{
+
+
+           return this.produtos.length;
+
+        }
+
+
+
+
 }
 
 
+
+
+
+       
 // const catalogo = new Catalogo("dados/produtos.json")
 
 

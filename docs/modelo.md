@@ -34,3 +34,17 @@ classDiagram
         +mudarLimite(number novoLimite) boolean
     }
 ```
+
+```mermaid
+classDiagram
+  class Catalogo {
+    -Produto[] produtos
+    +string[] recusados
+    +constructor(caminho: string)
+    +buscar(nome: string) : Produto | undefined
+    +precoDe(nome: string) : number | undefined
+    +quantidade() : number
+  }
+  ```
+
+
