@@ -5,11 +5,11 @@ O mapa das classes do backend. Cada dono acrescenta a sua peça no PR em que ela
 ```mermaid
 classDiagram
   class Produto {
-    +string nome
-    +number precoCentavos
-    +string{un, kg} unidade
-    +string categoria
-    +constructor(nome: string, precoCentavos: number, unidade: string{un, kg}, categoria: string) 
+    -string nome
+    -number preco_centavos
+    -string{un, kg} unidade
+    -string categoria
+    +constructor(nome: string, preco_centavos: number, unidade: string{un, kg}, categoria: string) 
     +precoEmReais() string
     +precoPorQuantidade(produto: string, quantidade: number) number
   }

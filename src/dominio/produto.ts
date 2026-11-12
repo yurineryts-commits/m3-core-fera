@@ -1,14 +1,26 @@
+// export interface IdProduto {
+
+
+
+// }
+
 export class Produto {
 
-    nome: string;
-    precoCentavos: number;
-    unidade: "kg" | "un";
-    categoria: string;
+    readonly nome: string;
+    readonly preco_centavos: number;
+    readonly unidade: "kg" | "un";
+    readonly categoria: string;
 
-    constructor(nome: string, precoCentavos: number, unidade: "kg" | "un", categoria: string) {
+    constructor(nome: string, preco_centavos: number, unidade: "kg" | "un", categoria: string) {
+
+        if (preco_centavos < 0){
+
+            throw new Error("Preço negativo: " + nome);
+
+        }
 
         this.nome = nome;
-        this.precoCentavos = precoCentavos;
+        this.preco_centavos = preco_centavos;
         this.unidade = unidade;
         this.categoria = categoria;
 
@@ -16,13 +28,13 @@ export class Produto {
 
     precoEmReais(): string {
 
-        return "R$ " + (this.precoCentavos / 100).toFixed(2);
+        return "R$ " + (this.preco_centavos / 100).toFixed(2);
 
     }
 
     precoPorQuantidade(produto: string, quantidade: number): number {
 
-        return this.precoCentavos * quantidade;
+        return this.preco_centavos * quantidade;
 
     }
 
