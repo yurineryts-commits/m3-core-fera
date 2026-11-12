@@ -4,13 +4,33 @@ O mapa das classes do backend. Cada dono acrescenta a sua peça no PR em que ela
 
 ```mermaid
 classDiagram
-  class Produto {
-    -string nome
-    -number preco_centavos
-    -string{un, kg} unidade
-    -string categoria
-    +constructor(nome: string, preco_centavos: number, unidade: string{un, kg}, categoria: string) 
-    +precoEmReais() string
-    +precoPorQuantidade(produto: string, quantidade: number) number
-  }
+    class Produto {
+        <<class>>
+        +readonly string nome
+        +readonly number preco_centavos
+        +readonly "kg" | "un" unidade
+        +readonly string categoria
+        +constructor(string nome, number preco_centavos, "kg" | "un" unidade, string categoria)
+        +precoEmReais() string
+        +precoPorQuantidade(string produto, number quantidade) number
+    }
+```
+```mermaid
+classDiagram
+    class ItemCesta {
+        <<interface>>
+        +number preco_centavos
+        +number quantidade
+    }
+
+    class Orcamento {
+        -ItemCesta[] itens
+        -number limiteCentavos
+        +constructor(ItemCesta[] itens, number limiteCentavos)
+        +colocar(number preco_centavos, number quantidade) boolean
+        +gasto() number
+        +saldo() number
+        +estourou() boolean
+        +mudarLimite(number novoLimite) boolean
+    }
 ```
