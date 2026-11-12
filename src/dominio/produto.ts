@@ -1,9 +1,3 @@
-// export interface IdProduto {
-
-
-
-// }
-
 export class Produto {
 
     readonly nome: string;

@@ -1,7 +1,3 @@
-# Modelo do produto
-
-O mapa das classes do backend. Cada dono acrescenta a sua peça no PR em que ela vira classe. O GitHub desenha o diagrama sozinho.
-
 ```mermaid
 classDiagram
     class Produto {
@@ -10,13 +6,11 @@ classDiagram
         +readonly number preco_centavos
         +readonly "kg" | "un" unidade
         +readonly string categoria
-        +constructor(string nome, number preco_centavos, "kg" | "un" unidade, string categoria)
+        +constructor(string nome, number preco_centavos, unidade, string categoria)
         +precoEmReais() string
         +precoPorQuantidade(string produto, number quantidade) number
     }
-```
-```mermaid
-classDiagram
+
     class ItemCesta {
         <<interface>>
         +number preco_centavos
@@ -33,18 +27,17 @@ classDiagram
         +estourou() boolean
         +mudarLimite(number novoLimite) boolean
     }
-```
 
-```mermaid
-classDiagram
-  class Catalogo {
-    -Produto[] produtos
-    +string[] recusados
-    +constructor(caminho: string)
-    +buscar(nome: string) : Produto | undefined
-    +precoDe(nome: string) : number | undefined
-    +quantidade() : number
-  }
+    class Catalogo {
+        -Produto[] produtos
+        +string[] recusados
+        +constructor(string caminho)
+        +buscar(string nome) Produto
+        +precoDe(string nome) number
+        +quantidade() number
+    }
+
+    Catalogo "1" o-- "*" Produto : armazena
+    Orcamento "1" o-- "*" ItemCesta : controla
+
   ```
-
-
